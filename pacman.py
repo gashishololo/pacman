@@ -83,6 +83,23 @@ class Pacman(GameObject):
         GameObject.__init__(self, './resources/pacman.png', x, y, tile_size, map_size)
         self.direction = 0
         self.velocity = 4.0 / 10.0
+        
+    def __get_direction(self):
+        return self.__direction;
+    def __set_direction(self, d):
+        self.__direction = d
+        if d == 1:
+            self.image = pygame.image.load('./resources/pacman.png')
+        elif d == 2:
+            self.image = pygame.image.load('./resources/pacmandown.png')
+        elif d == 3:
+            self.image = pygame.image.load('./resources/pacmanleft.png')
+        elif d == 4:
+            self.image = pygame.image.load('./resources/pacmanup.png')
+        elif d != 0:
+            raise ValueError("invalid direction detected")
+    direction = property(__get_direction, __set_direction)
+
 
     def game_tick(self):
         super(Pacman, self).game_tick()
