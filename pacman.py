@@ -1,3 +1,4 @@
+__author__ = 'student'
 import sys
 import pygame
 from pygame.locals import *
@@ -236,7 +237,7 @@ class Wall(GameObject):
 
 class Food(GameObject):
     def  __init__(self,x,y,tile_size, map_size):
-        GameObject.__init__(self, './resources/b.png', x, y, tile_size, map_size)
+        GameObject.__init__(self, './resources/Apple.jpg', x, y, tile_size, map_size)
 
 class Bonys(GameObject):
     def  __init__(self,x,y,b, img,tile_size, map_size):
@@ -266,12 +267,6 @@ if __name__ == '__main__':
                 food.append(Food(j,i,tile_size,map_size))
             elif a=='g':
                 ghosts.append(Ghost(j, i, tile_size, map_size))
-            '''elif a=='s':
-                bonys.append(Bonys(j,i,'s',"./resources/s.png",tile_size,map_size))
-            elif a=='i':
-                bonys.append(Bonys(j,i,'i',"./resources/i.png",tile_size,map_size))
-            elif a=='y':
-                bonys.append(Bonys(j,i,'y',"./resources/b.png",tile_size,map_size))'''
 
     pacman = Pacman(5, 5, tile_size, map_size)
     background = pygame.image.load("./resources/background.png")
