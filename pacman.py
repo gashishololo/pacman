@@ -298,3 +298,7 @@ if __name__ == '__main__':
             else:
                 g+=1
         pygame.display.update()
+
+        for ghost in ghosts:
+        if int(ghost.x) == int(pacman.x) and int(ghost.y) == int(pacman.y):
+             print('You`ve died, try again')
