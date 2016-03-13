@@ -144,7 +144,7 @@ class Ghost(GameObject):
 
 class Pacman(GameObject):
     def __init__(self, x, y, tile_size, map_size):
-        GameObject.__init__(self, './resources/pacmanright.png', x, y, tile_size, map_size)
+        GameObject.__init__(self, './resources/pacman.png', x, y, tile_size, map_size)
         self.direction = 0
         self.velocity = 1
         map.map[self.x][self.y]='p'
@@ -212,7 +212,7 @@ def process_events(events, pacman):
                 pacman.image=pygame.image.load('./resources/pacmanleft.png')
             elif event.key == K_RIGHT:
                 pacman.direction = 1
-                pacman.image=pygame.image.load('./resources/pacmanright.png')
+                pacman.image=pygame.image.load('./resources/pacman.png')
             elif event.key == K_UP:
                 pacman.image=pygame.image.load('./resources/pacmanup.png')
                 pacman.direction = 4
@@ -235,13 +235,7 @@ class Wall(GameObject):
 
 class Food(GameObject):
     def  __init__(self,x,y,tile_size, map_size):
-        GameObject.__init__(self, './resources/b.png', x, y, tile_size, map_size)
-
-
-class Bonys(GameObject):
-    def  __init__(self,x,y,b, img,tile_size, map_size):
-        GameObject.__init__(self, img, x, y, tile_size, map_size)
-        self.b=b
+        GameObject.__init__(self, './resources/Apple.png', x, y, tile_size, map_size)
 
 
 if __name__ == '__main__':
@@ -252,7 +246,6 @@ if __name__ == '__main__':
     walls=[]
     ghosts=[]
     food=[]
-    bonys=[]
     map=Map(map_size,map_size)
     for i in range(map_size+1):
         for j in range(map_size+1):
@@ -266,14 +259,6 @@ if __name__ == '__main__':
                 food.append(Food(j,i,tile_size,map_size))
             elif a=='g':
                 ghosts.append(Ghost(j, i, tile_size, map_size))
-            elif a=='s':
-                bonys.append(Bonys(j,i,'s',"./resources/s.png",tile_size,map_size))
-            elif a=='i':
-                bonys.append(Bonys(j,i,'i',"./resources/i.png",tile_size,map_size))
-            elif a=='y':
-                bonys.append(Bonys(j,i,'y',"./resources/y.png",tile_size,map_size))
-            elif a=='m':
-                bonys.append(Bonys(j,i,'m',"./resources/m.png",tile_size,map_size))
             elif a=='p':
                 pacman = Pacman(j, i, tile_size, map_size)
     background = pygame.image.load("./resources/background.png")
@@ -299,21 +284,6 @@ if __name__ == '__main__':
             else:
                 j+=1
         k=0
-        while k<len(bonys):
-            bonys[k].draw(screen)
-            if bonys[k].x==pacman.x and bonys[k].y==pacman.y:
-                if bonys[k].b=='s':
-                    pacman.bonys='s'
-                elif bonys[k].b=='i':
-                    pacman.bonys='i'
-                elif bonys[k].b=='m':
-                    pacman.bonys='m'
-                else:
-                    pacman.bonys='y'
-                pacman.timer=0
-                bonys.pop(k)
-            else:
-                k+=1
         if len(food)==0:
             sys.exit(0)
         pacman.draw(screen)
